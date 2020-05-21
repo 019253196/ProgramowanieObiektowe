@@ -20,7 +20,7 @@ class Tablica
 
 	int getY(void);                                                  //zwraca aktualną liczbę wierszy
 
-	bool getTabExist(void);                                          //zwraca aktualną wartość tabExist
+	bool getTabExist(void);                                          //zwraca 0, gdy tablica nie została zainicjalizowana
 
 	int getCell(int x, int y);                                       //zwraca wartość w danej komórce
 

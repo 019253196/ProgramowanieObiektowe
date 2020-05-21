@@ -9,7 +9,6 @@ class Tablica
 	int **arr;
 	int x;
 	int y;
-	bool tabExist;
 
 	public:
 

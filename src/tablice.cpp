@@ -9,7 +9,7 @@ Tablica::Tablica()
 {
 	this->x = 0;
 	this->y = 0;
-	this->tabExist = false;
+	this->arr=NULL;
 }
 
 Tablica::Tablica(int x, int y)
@@ -29,7 +29,7 @@ int Tablica::getY(void)
 
 bool Tablica::getTabExist(void)
 {
-	return this->tabExist;
+	return !(this->arr==NULL);
 }
 
 int Tablica::getCell(int x, int y)
@@ -47,29 +47,34 @@ int Tablica::createTab(int x, int y)
 		(this->arr)[i] = new int [this->x];
 	}
 	this->zeroTab();
-	this->tabExist = true;
 	return 0;
 }
 
 void Tablica::deleteTab()
 {
-	for(int i = 0; i < this->y; i++)
+	if(this->arr==NULL)
 	{
-		delete (this->arr)[i];
+		for(int i = 0; i < this->y; i++)
+		{
+			delete (this->arr)[i];
+		}
+		delete this->arr;
+		this->arr=NULL;
+		this->x = 0;
+		this->y = 0;
 	}
-	delete this->arr;
-	this->x = 0;
-	this->y = 0;
-	this->tabExist = false;
 }
 
 void Tablica::zeroTab()
 {
-	for(int i = 0; i < this->y; i++)
+	if(this->arr!=NULL)
 	{
-		for(int j = 0; j < this->x; j++)
+		for(int i = 0; i < this->y; i++)
 		{
-			this->arr[i][j] = 0;
+			for(int j = 0; j < this->x; j++)
+			{
+				this->arr[i][j] = 0;
+			}
 		}
 	}
 }
@@ -85,12 +90,10 @@ void Tablica::changeTabSize(int x, int y)
 				buffer.arr[i][j] = this->getCell(j, i);
 			}
 		}
-	displayTab(&buffer);
 	this->deleteTab();
 	this->x = buffer.x;
 	this->y = buffer.y;
 	this->arr = buffer.arr;
-	this->tabExist = buffer.tabExist;
 }
 
 
@@ -143,7 +146,6 @@ int Tablica::loadTab()
 		this->x = buffer.x;
 		this->y = buffer.y;
 		this->arr = buffer.arr;
-		this->tabExist = buffer.tabExist;
 		return 0;
 	}
 	else

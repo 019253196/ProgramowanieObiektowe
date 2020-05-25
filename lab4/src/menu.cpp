@@ -129,9 +129,9 @@ int processAnw(Tablica *tab, int odp)
 				b1 = readSizeY();
 				if(tab->getTabExist())
 				{
-					tab->deleteTab();  //	DESTRUKTOR?
+					tab->deleteTab();
 				}
-				tab->createTab(a1, b1); //KONSTRUKTOR??
+				tab->createTab(a1, b1);
 				break;
 			case 2:                                                           //2) Zmień rozmiar tablicy
 				a1 = readSizeX();
@@ -158,7 +158,7 @@ int processAnw(Tablica *tab, int odp)
 				{
 					fileOpenCheck();
 				}
-				break; 
+				break;
 			case 6:                                                           //6) Sumuj wiersz
 				a1 = whichRow();
 				if(checkRow(tab, a1))

@@ -1,19 +1,16 @@
 #ifndef TABLICE_H
 #define TABLICE_H
 #include <iostream>
-#include "komorki.h"
 
 using namespace std;
 
 class Tablica
 {
-private:
-
-	Cell ***arr;
+	int **arr;
 	int x;
 	int y;
 
-public:
+	public:
 
 	Tablica();                                                       //konstruktor z domyślnym rozmiarem 0,0
 
@@ -25,12 +22,7 @@ public:
 
 	bool getTabExist(void);                                          //zwraca 0, gdy tablica nie została zainicjalizowana
 
-	/**
-	 * @param[in] - kolumna
-	 * @param[in] - wiersz
-	 * @return - adres na obiekt komórka
- 	* */
-	Cell getCell(int x, int y);                                      //zwraca adres na obiekt komórka o podanych koordynatach
+	int getCell(int x, int y);                                       //zwraca wartość w danej komórce
 
 	/**
 	 * @param[in] - ilość kolumn
@@ -53,8 +45,8 @@ public:
 	 * @param[in] x - numer kolumny
 	 * @param[in] y - numer wiersza
 	 * */
-	void updateCell(int x, int y);                                   //wprowadza zmiane do komórki
-	
+	void updateCell(int x, int y);                                   //wprowadza zmiane do komorki
+
 	/**
 	 * @return - kod błędu lub 0 przy powodzenia
 	 * */
@@ -64,7 +56,7 @@ public:
 	 * @return - kod błędu lub 0 przy powodzenia
 	 * */
 	int loadTab();                                                   //wczytuje tablice z pliku .txt
-	
+
 	/**
 	 * @param[in] a - numer wiersza
 	 * */

@@ -2,7 +2,6 @@
 #include <fstream>
 #include "tablice.h"
 #include "tablice_wysw.h"
-#include "komorki.h"
 
 using namespace std;
 
@@ -30,22 +29,22 @@ int Tablica::getY(void)
 
 bool Tablica::getTabExist(void)
 {
-	return this->arr != NULL;
+	return this->arr!=NULL;
 }
 
-Cell Tablica::getCell(int x, int y)
+int Tablica::getCell(int x, int y)
 {
-	return *(this->arr[y][x]);
+	return this->arr[y][x];
 }
 
 int Tablica::createTab(int x, int y)
 {
 	this->y = y;
 	this->x = x;
-	this->arr = new Cell** [this->y];
+	this->arr = new int* [this->y];
 	for(int i = 0; i < this->y; i++)
 	{
-		(this->arr)[i] = new Cell* [this->x];
+		(this->arr)[i] = new int [this->x];
 	}
 	this->zeroTab();
 	return 0;
@@ -74,8 +73,7 @@ void Tablica::zeroTab()
 		{
 			for(int j = 0; j < this->x; j++)
 			{
-				this->arr[i][j] = new Cell;
-				this->arr[i][j]->setCellValue(0);
+				this->arr[i][j] = 0;
 			}
 		}
 	}
@@ -89,8 +87,7 @@ void Tablica::changeTabSize(int x, int y)
 		{
 			for(int j = 0; j < buffer.x && j < this->x;  j++)
 			{
-				//buffer.arr[i][j] = this->getCell(j, i);
-				buffer.arr[i][j] = this->arr[i][j];
+				buffer.arr[i][j] = this->getCell(j, i);
 			}
 		}
 	this->deleteTab();
@@ -102,11 +99,10 @@ void Tablica::changeTabSize(int x, int y)
 
 void Tablica::updateCell(int x, int y)
 {
-	int a = 0;
-	cout << "Wprowadz zmiane: ";
-	cin >> a;
-	this->arr[y][x]->setCellValue(a);
+		cout << "Wprowadz zmiane: ";
+		cin >> this->arr[y][x];
 }
+
 
 int Tablica::saveTab()
 {
@@ -118,11 +114,7 @@ int Tablica::saveTab()
 		file.write((const char *) &this->y, sizeof(this->y));
 		for(int i = 0; i < this->y; i++)
 		{
-			for(int j = 0; j < this->x; j++)
-			{
-				int a = this->getCell(j, i).getCellValue();
-				file.write((const char *) &a, sizeof(int));
-			}
+			file.write((const char *) this->arr[i], this->x * sizeof(int));
 		}
 		file.close();
 		return 0;
@@ -148,12 +140,7 @@ int Tablica::loadTab()
 		cout << x << " " << y << endl;
 		for(int i = 0; i < buffer.y; i++)
 		{
-			for(int j = 0; j < buffer.x; j++)
-			{
-				int a = 0;
-				file.read((char *) &a, sizeof(int));
-				buffer.arr[i][j]->setCellValue(a);
-			}
+			file.read((char *) (buffer.arr)[i], buffer.x * sizeof(int));
 		}
 		file.close();
 		this->x = buffer.x;
@@ -172,7 +159,7 @@ int Tablica::sumRow(int a)
 	int sum = 0;
 	for(int i = 0; i < this->x; i++)
 	{
-		sum += this->arr[a][i]->getCellValue();
+		sum += this->arr[a][i];
 	}
 	return sum;
 }
@@ -182,21 +169,21 @@ int Tablica::sumColumn(int a)
 	int sum = 0;
 	for(int i = 0; i < this->y; i++)
 	{
-		sum += this->arr[i][a]->getCellValue();
+		sum += this->arr[i][a];
 	}
 	return sum;
 }
 
 int Tablica::largest(int a1, int a2, int b1, int b2)
 {
-	int max = this->arr[a1][a2]->getCellValue();
+	int max = this->arr[a1][a2];
 	for(int i = a1; i <= b1; i++)
 	{
 		for(int j = a2; j <=b2; j++)
 		{
-			if(this->arr[i][j]->getCellValue() > max) 
+			if(this->arr[i][j] > max) 
 			{
-				max = this->arr[i][j]->getCellValue();
+				max = this->arr[i][j];
 			}
 		}
 	}
@@ -205,14 +192,14 @@ int Tablica::largest(int a1, int a2, int b1, int b2)
 
 int Tablica::smallest(int a1, int a2, int b1, int b2)
 {
-	int min = this->arr[a1][a2]->getCellValue();
+	int min = this->arr[a1][a2];
 	for(int i = a1; i <= b1; i++)
 	{
 		for(int j = a2; j <= b2; j++)
 		{
-			if(this->arr[i][j]->getCellValue() < min)
+			if(this->arr[i][j] < min)
 			{
-				min = this->arr[i][j]->getCellValue();
+				min = this->arr[i][j];
 			}
 		}
 	}
@@ -227,7 +214,7 @@ double Tablica::average(int a1, int a2, int b1, int b2)
 	{
 		for(int j = a2; j <= b2; j++)
 		{
-			sum += this->arr[i][j]->getCellValue();
+			sum += this->arr[i][j];
 			n++;
 		}
 	}

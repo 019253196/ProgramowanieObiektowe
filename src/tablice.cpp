@@ -89,7 +89,6 @@ void Tablica::changeTabSize(int x, int y)
 		{
 			for(int j = 0; j < buffer.x && j < this->x;  j++)
 			{
-				//buffer.arr[i][j] = this->getCell(j, i);
 				buffer.arr[i][j] = this->arr[i][j];
 			}
 		}

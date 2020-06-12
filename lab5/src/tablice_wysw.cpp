@@ -10,7 +10,7 @@ void displayTab(Tablica *tab)
 	{
 		for(int j = 0; j < (x); j++)
 		{
-			cout << tab->getCell(j, i)->getString() << "|";
+			cout << tab->getCell(j, i).getCellValue() << "|";
 		}
 		cout << endl;
 	}

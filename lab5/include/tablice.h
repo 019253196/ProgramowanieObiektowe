@@ -30,7 +30,7 @@ public:
 	 * @param[in] - wiersz
 	 * @return - adres na obiekt komórka
  	* */
-	Cell* getCell(int x, int y);                                      //zwraca adres na obiekt komórka o podanych koordynatach
+	Cell getCell(int x, int y);                                      //zwraca adres na obiekt komórka o podanych koordynatach
 
 	/**
 	 * @param[in] - ilość kolumn

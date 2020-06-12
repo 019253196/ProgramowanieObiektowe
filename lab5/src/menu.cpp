@@ -48,7 +48,7 @@ int readSizeY()
 int readSizeX()
 {
 	int x;
-	cout << "Prosze podac liczbe kolumn: ";
+	cout << "Prosze podac liczbe kolumn: " ;
 	cin >> x;
 	return x;
 }
@@ -158,7 +158,7 @@ int processAnw(Tablica *tab, int odp)
 				{
 					fileOpenCheck();
 				}
-				break;
+				break; 
 			case 6:                                                           //6) Sumuj wiersz
 				a1 = whichRow();
 				if(checkRow(tab, a1))
